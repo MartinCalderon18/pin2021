@@ -35,3 +35,16 @@ sudo apt-get install helm
 # aws IAM Authenticator
 curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
 
+## Install Terraform
+
+# Add Hashicorp gpg signature
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+
+# Add HashiCorp package repository
+sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+# Update package manager sources
+sudo apt update
+
+# Install Terraform
+sudo apt install terraform
