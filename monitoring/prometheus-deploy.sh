@@ -19,6 +19,5 @@ helm install prometheus prometheus-community/prometheus \
 # Verificar la instalación
 kubectl get all -n prometheus
 
-# Exponer prometheus desde nuestra máquina en el puerto 8080
-kubectl port-forward -n prometheus deploy/prometheus-server 8080:9090
---address 0.0.0.0
+# Exponer prometheus en la instancia de EC2 en el puerto 8080
+kubectl port-forward -n prometheus deploy/prometheus-server 8080:9090 --address 0.0.0.0
