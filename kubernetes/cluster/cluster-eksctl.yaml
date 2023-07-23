@@ -1,0 +1,35 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: test-cluster
+  region: us-east-1
+  version: "1.25"
+
+iam:
+  withOIDC: true
+
+addons:
+- name: vpc-cni 
+  attachPolicyARNs:
+    - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+- name: coredns
+  version: latest 
+- name: kube-proxy
+  version: latest
+
+managedNodeGroups:
+- name: mundoseNodes
+  minSize: 3
+  maxSize: 5
+  volumeSize: 30
+  instanceType: t2.micro
+  amiFamily: AmazonLinux2
+  labels: { role: workers }
+  tags:
+    nodegroup-role: worker
+  ssh:
+    allow: true
+    publicKeyName: temporal
+
